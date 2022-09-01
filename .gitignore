@@ -1,0 +1,11 @@
+*
+!*/
+!/.gitignore
+!/contest/**/*
+!/cplib/**/*
+!/example/**/*
+!/gym//**/*
+!/debug.cpp
+!/template.cpp
+!/README.md
+!/LICENSE
