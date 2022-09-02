@@ -1,6 +1,5 @@
+// https://github.com/cuzperf/cf
 #include <bits/stdc++.h>
-#include <cstddef>
-#include <vector>
 #define cerr(x) std::cerr << (#x) << " is " << (x) << '\n'
 using LL = long long;
 
@@ -30,7 +29,7 @@ bool solve() {
         ++cnt;
         x = i;
         y = j;
-      } 
+      }
       if (sm(i, j - 1) == 3) {
         ++cnt;
         x = i;

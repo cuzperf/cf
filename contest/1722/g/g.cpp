@@ -1,5 +1,5 @@
+// https://github.com/cuzperf/cf
 #include <bits/stdc++.h>
-#include <cassert>
 #define cerr(x) std::cerr << (#x) << " is " << (x) << '\n'
 using LL = long long;
 
