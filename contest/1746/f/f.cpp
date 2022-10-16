@@ -2,73 +2,80 @@
 #include <bits/stdc++.h>
 #define cerr(x) std::cerr << (#x) << " is " << (x) << '\n'
 using LL = long long;
+std::mt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count());
 
-class SegTree {
-  int n;
-  std::vector<int> g;
-  void pull(int p) {
-    g[p] = std::gcd(g[p << 1], g[p << 1| 1]);
-  }
-  void update(int x, int val, int l, int r, int p) {
-    if (r - l == 1) {
-      g[p] = val;
-    } else {
-      int m = (l + r) / 2;
-      if (x < m) update(x, val, l, m, p << 1);
-      else update(x, val, m, r, p << 1 | 1);
-      pull(p);
+template<typename T>
+struct Bitree {
+  const int n_;
+  std::vector<T> s_;
+  Bitree() {}
+  Bitree(int n) : n_(n), s_(n) {}
+  static int lowbit(int n) { return n & (-n); }
+  void add(int id, T p) {
+    for (int i = id + 1; i <= n_; i += lowbit(i)) {
+      s_[i - 1] += p;
     }
   }
-  int query(int L, int R, int l, int r, int p) {
-    if (L <= l && R >= r) {
-      return g[p];
+  T sum(int id) {
+    T r = 0;
+    for (int i = id; i > 0; i -= lowbit(i)) {
+      r += s_[i - 1];
     }
-    int m = (l + r) / 2;
-    int ans = 0;
-    if (L < m) ans = std::gcd(ans, query(L, R, l, m, p << 1));
-    if (R > m) ans = std::gcd(ans, query(L, R, m, r, p << 1 | 1));
-    return ans;
+    return r;
   }
- public:
-  SegTree(std::vector<int>& a) : n(a.size()), g(n * 4) {
-    std::function<void(int, int, int)> build = [&](int l, int r, int p) {
-      if (r - l == 1) {
-        g[p] = a[l];
-      } else {
-        int m = (l + r) / 2;
-        build(l, m, p << 1);
-        build(m, r, p << 1 | 1);
-        pull(p);
-      }
-    };
-    build(0, n, 1);
-  }
-  void update(int x, int val) {
-    update(x - 1, val, 0, n, 1);
-  }
-  int query(int l, int r) {
-    return query(l - 1, r, 0, n, 1);
-  }
+  T sum(int l, int r) { return sum(r) - sum(l); }
 };
+
+constexpr int CNT = 52;
 
 void solve() {
   int n, q;
   std::cin >> n >> q;
   std::vector<int> a(n);
   for (auto &x : a) std::cin >> x;
-  SegTree A(a);
-  while (q--) {
-    int op;
-    std::cin >> op;
-    if (op == 1) {
-      int x, val;
-      std::cin >> x >> val;
-      A.update(x, val);
+  auto b = a;
+  std::vector<int> op(q), l(q), r(q), k(q);
+  for (int i = 0; i < q; ++i) {
+    std::cin >> op[i] >> l[i] >> r[i];
+    --l[i];
+    if (op[i] == 1) {
+      b.emplace_back(r[i]);
     } else {
-      int l, r, k;
-      std::cin >> l >> r >> k;
-      std::cerr << l << ' ' << r << ' ' << A.query(l, r) << '\n';
-      std::cout << (A.query(l, r) % k == 0 ? "YES" : "NO") << '\n';
+      std::cin >> k[i];
+    }
+  }
+  std::sort(b.begin(), b.end());
+  b.erase(std::unique(b.begin(), b.end()), b.end());
+  for (auto &x : a) x = std::lower_bound(b.begin(), b.end(), x) - b.begin();
+  for (int i = 0; i < q; ++i) if (op[i] == 1) {
+    r[i] = std::lower_bound(b.begin(), b.end(), r[i]) - b.begin();
+  }
+  int m = b.size();
+  std::vector<int> ans(q, 1);
+  for (int _ = 0; _ < CNT; ++_) {
+    std::vector<int> f(m);
+    for (int i = 0; i < m; ++i) {
+      f[i] = rnd() % 998244353;
+    }
+    Bitree<LL> A(n);
+    for (int i = 0; i < n; ++i) {
+      A.add(i, f[a[i]]);
+    }
+    auto c = a;
+    for (int i = 0; i < q; ++i) {
+      if (op[i] == 1) {
+        A.add(l[i], f[r[i]] - f[c[l[i]]]);
+        c[l[i]] = r[i];
+      } else {
+        if (ans[i] && A.sum(l[i], r[i]) % k[i] != 0) {
+          ans[i] = 0;
+        }
+      }
+    }
+  }
+  for (int i = 0; i < q; ++i) {
+    if (op[i] == 2) {
+      std::cout << (ans[i] ? "YES" : "NO") << '\n';
     }
   }
 }

@@ -10,9 +10,11 @@ My config:
 clang++ $%full%$ -o $%file%$.out -std=c++17 -D_GLIBCXX_DEBUG -Wall -Wshadow -Wno-error -g
 ```
 
+> Note than `D_GLIBCXX_DEBUG` may hide debug info
+
 ``` json
 {
-  // clang++ main.cpp -o main.out -std=c++17 -D_GLIBCXX_DEBUG -Wall -Wshadow -Wno-error -g
+  // clang++ main.cpp -o main.out -std=c++17 -Wall -Wshadow -Wno-error -g
   // .vscode/launch.json need vscode extension: codelldb and replace 1722 with current contest id
 
   // Use IntelliSense to learn about possible attributes.
