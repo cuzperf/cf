@@ -7,14 +7,14 @@ Source Code In Codeforces.
 My config:
 
 ``` shell
-clang++ $%full%$ -o $%file%$.out -std=c++17 -D_GLIBCXX_DEBUG -Wall -Wshadow -Wno-error -g
+clang++ $%full%$ -o $%file%$.out -std=c++17 -Wall -Wshadow -ftrapv -Wno-error -g -fsanitize=undefined
 ```
 
-> Note than `D_GLIBCXX_DEBUG` may hide debug info
+> Note than `D_GLIBCXX_DEBUG` may hide debug info, and `-Wextra` may be too annoy
 
 ``` json
 {
-  // clang++ main.cpp -o main.out -std=c++17 -Wall -Wshadow -Wno-error -g
+  // clang++ main.cpp -o main.out -std=c++17 -Wall -Wshadow -ftrapv -Wno-error -g -fsanitize=undefined
   // .vscode/launch.json need vscode extension: codelldb and replace 1722 with current contest id
 
   // Use IntelliSense to learn about possible attributes.
