@@ -378,7 +378,7 @@ class MexS {
     if (id == ans_) ans_ = -1;
     for (auto &x : a_) {
       int tid = id / B;
-      x[tid] ^= 1ULL << id - tid * B;
+      x[tid] ^= 1ULL << (id - tid * B);
       if (x[tid]) return;
       id = tid;
     }
@@ -388,7 +388,7 @@ class MexS {
     if (id <= ans_) ans_ = id;
     for (auto &x : a_) {
       int tid = id / B;
-      x[tid] ^= 1ULL << id - tid * B;
+      x[tid] ^= 1ULL << (id - tid * B);
       if (x[tid] != -1ULL) return;
       id = tid;
     }
