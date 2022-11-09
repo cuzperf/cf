@@ -12,6 +12,8 @@ clang++ $%full%$ -o $%file%$.out -std=c++17 -Wall -Wshadow -ftrapv -Wno-error -g
 
 > Note than `D_GLIBCXX_DEBUG` may hide debug info, and `-Wextra` may be too annoy
 
+`.vscode/launch.json` 配置：
+
 ``` json
 {
   // clang++ main.cpp -o main.out -std=c++17 -Wall -Wshadow -ftrapv -Wno-error -g -fsanitize=undefined
