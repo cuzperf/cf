@@ -11,7 +11,7 @@
 //                           __gnu_pbds::rb_tree_tag,             \
 //                           __gnu_pbds::tree_order_statistics_node_update>
 
-#include <bits/stdc++.h>
+#include <bits/stdc++.h>  // go here: https://paste.ubuntu.com/p/Nw3pSFTtVN/ if you don't have
 #define cerr(x) std::cerr << (#x) << " is " << (x) << '\n'
 using LL = long long;
 
