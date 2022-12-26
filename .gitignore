@@ -10,4 +10,5 @@
 !/template.cpp
 !/README.md
 !/LICENSE
+*.dSYM
 *.out
