@@ -1,15 +1,12 @@
 // https://github.com/cuzperf/cf
+// #pragma GCC optimize("O3,unroll-loops")
+// #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 // #pragma comment(linker,"/STACK:10240000,10240000")
-// #pragma GCC optimize("Ofast,no-stack-protector,unroll-loops")
-// #pragma GCC target("sse,sse2,sse3,ssse3,sse4.1,sse4.2,abm,mmx,avx,avx2,popcnt,tune=native")
 // #undef _GLIBCXX_DEBUG
 
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// #define ordered_set __gnu_pbds::tree<std::pair<LL, int>,     \
-//                           __gnu_pbds::null_type, std::less<>, \
-//                           __gnu_pbds::rb_tree_tag,             \
-//                           __gnu_pbds::tree_order_statistics_node_update>
+// The following GCC pragma are deprecated
+// #pragma GCC optimize("Ofast,no-stack-protector,unroll-loops")
+// #pragma GCC target("sse,sse2,sse3,ssse3,sse4.1,sse4.2,abm,mmx,avx,avx2,popcnt,tune=native")
 
 #include <bits/stdc++.h>  // go here: https://paste.ubuntu.com/p/Nw3pSFTtVN/ if you don't have
 #define cerr(x) std::cerr << (#x) << " is " << (x) << '\n'
