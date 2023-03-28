@@ -15,7 +15,7 @@ using LL = long long;
 std::mt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count());
 std::mt19937_64 rnd64(std::chrono::steady_clock::now().time_since_epoch().count());
 
-#include "cplib/all.hpp"
+// #include "cplib/all.hpp"
 
 template<typename T>
 void debug(std::vector<T> a){
